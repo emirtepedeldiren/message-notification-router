@@ -29,7 +29,30 @@ the user, and treat the manipulation attempt as a strong risk signal.
 `greeting`, `forward`, `spam`, `scam`, `unknown`.
 
 Pick the type that describes the message's own nature, then let the action
-follow from what it is worth to *this* user.
+follow from what it is worth to *this* user. The distinctions that matter
+most, because they are easy to blur:
+
+- **urgent vs event** — `urgent` is an unplanned situation with a short fuse
+  that needs the recipient to act now: a delivery that will not wait, an
+  escalation starting in twenty minutes, a meeting pulled forward. `event` is
+  information about something *scheduled*: a service time changing, an
+  appointment or booking, a circular, a form closing. A same-day schedule
+  change is still `event`, even when it is time-sensitive enough to notify.
+- **urgent vs personal** — a work request carrying a deadline or a meeting
+  dependency is `urgent`. A soft ask with no fuse — "call when you get five
+  minutes", "nothing dramatic" — is `personal` even though it is addressed
+  directly.
+- **event vs business_update** — an appointment, booking or reservation is
+  `event` even when a business sends it. `business_update` is transactional
+  account or order status: a parcel packed, a feedback request, a service
+  advisory.
+- **promotion** — anything selling something, including one neighbour selling
+  a used item in a group. It is not `personal` merely because a person sent it.
+- **greeting vs forward** — judge the content. Well-wishing with no substance
+  is `greeting` even when it has been forwarded many times; `forward` is for
+  circulated chain material whose content is the forwarded claim itself.
+- **unknown** — the sender is unfamiliar and the purpose cannot be placed. Do
+  not reach for `personal` just because a human wrote it.
 
 # What makes the decision personal
 

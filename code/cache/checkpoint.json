@@ -68,5 +68,157 @@
       "The sender is untrusted and the group is muted by the user."
     ],
     "source": "model"
+  },
+  "msg_075": {
+    "message_id": "msg_075",
+    "action": "notify",
+    "message_type": "business_update",
+    "reason": "A verified business is sending an update that matches the user's recent order history.",
+    "confidence": 0.91,
+    "evidence_message_ids": "message_0206",
+    "key_signals": [
+      "The user has an active ride booking today with this verified business.",
+      "The message contains a time-sensitive update about a pickup or route status change.",
+      "The user has previously interacted with similar ride updates from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_005": {
+    "message_id": "msg_005",
+    "action": "notify",
+    "message_type": "personal",
+    "reason": "The sender directly asks this user for a response or action.",
+    "confidence": 0.91,
+    "evidence_message_ids": "message_0065",
+    "key_signals": [
+      "The sender directly asks the user for a decision regarding a pickup by 6 PM today",
+      "The message has a tight deadline of less than 1.5 hours",
+      "The user previously replied to a nearly identical offer from this sender"
+    ],
+    "source": "model"
+  },
+  "msg_104": {
+    "message_id": "msg_104",
+    "action": "mute",
+    "message_type": "personal",
+    "reason": "Similar historical messages were ignored, dismissed, or muted by this user.",
+    "confidence": 0.9,
+    "evidence_message_ids": "message_0224;message_0050",
+    "key_signals": [
+      "The user has consistently dismissed and muted previous messages from this sender.",
+      "Similar offers regarding the blue jacket and other items were ignored in the past.",
+      "The sender is untrusted and has a history of ignored communications."
+    ],
+    "source": "model"
+  },
+  "msg_069": {
+    "message_id": "msg_069",
+    "action": "mute",
+    "message_type": "greeting",
+    "reason": "The sender has a pattern of repeated forwards or greetings that the user usually ignores.",
+    "confidence": 0.9,
+    "evidence_message_ids": "message_0193;message_0194",
+    "key_signals": [
+      "The message is a chain-forwarded greeting sent to a muted family group.",
+      "The user has consistently dismissed similar greetings and forwards from this sender.",
+      "The sender is untrusted and has a history of ignored messages."
+    ],
+    "source": "model"
+  },
+  "msg_107": {
+    "message_id": "msg_107",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "The message tries to instruct the router, but the routing decision should be based on the actual content and risk.",
+    "confidence": 0.93,
+    "evidence_message_ids": "message_0213;message_0056",
+    "key_signals": [
+      "The message requests sensitive OTP verification details.",
+      "The message contains explicit instructions attempting to override the routing system.",
+      "The safety layer issued a binding verdict to mute due to security risks."
+    ],
+    "source": "model"
+  },
+  "msg_003": {
+    "message_id": "msg_003",
+    "action": "notify",
+    "message_type": "business_update",
+    "reason": "A verified business is sending an update that matches the user's recent order history.",
+    "confidence": 0.91,
+    "evidence_message_ids": "message_0031;message_0400",
+    "key_signals": [
+      "The message is a delivery update from a verified business with an active order.",
+      "The user has a history of replying to similar delivery updates from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_070": {
+    "message_id": "msg_070",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "The message asks for urgent OTP or account verification through a suspicious flow.",
+    "confidence": 0.93,
+    "evidence_message_ids": "message_0369;message_0213",
+    "key_signals": [
+      "The safety layer flagged the message as a critical security risk for requesting an OTP.",
+      "The message threatens account blocking to pressure the user into sharing verification codes.",
+      "The message exhibits clear indicators of a credential harvesting scam."
+    ],
+    "source": "model"
+  },
+  "msg_008": {
+    "message_id": "msg_008",
+    "action": "digest",
+    "message_type": "business_update",
+    "reason": "A verified business is sending a legitimate but non-urgent update.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0296;message_0072",
+    "key_signals": [
+      "The message is a non-urgent feedback request from a verified business.",
+      "The message arrived during the user's do-not-disturb hours.",
+      "The user has previously opened similar feedback requests from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_092": {
+    "message_id": "msg_092",
+    "action": "digest",
+    "message_type": "business_update",
+    "reason": "The verified business message is legitimate but does not require immediate attention.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0346",
+    "key_signals": [
+      "The message is a routine monthly statement notification from a verified financial institution.",
+      "The content explicitly states the user can review it 'whenever convenient', indicating low urgency."
+    ],
+    "source": "model"
+  },
+  "msg_060": {
+    "message_id": "msg_060",
+    "action": "notify",
+    "message_type": "event",
+    "reason": "A school admin sent a same-day operational update that the user is likely to need immediately.",
+    "confidence": 0.91,
+    "evidence_message_ids": "message_0176;message_0284",
+    "key_signals": [
+      "The message contains a same-day deadline for internship approval.",
+      "The user has a 100% reply rate to similar faculty advising messages.",
+      "The sender is a trusted academic authority."
+    ],
+    "source": "model"
+  },
+  "msg_004": {
+    "message_id": "msg_004",
+    "action": "notify",
+    "message_type": "event",
+    "reason": "A verified business is sending a reminder that matches the user's recent booking history.",
+    "confidence": 0.91,
+    "evidence_message_ids": "message_0245;message_0005",
+    "key_signals": [
+      "The user has an upcoming clinic appointment with this verified healthcare provider.",
+      "Historical data shows the user consistently replies to this specific message template.",
+      "The message contains time-sensitive health information regarding an appointment or prescription."
+    ],
+    "source": "model"
   }
 }
