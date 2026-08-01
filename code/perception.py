@@ -139,6 +139,12 @@ def sniff_mime(path: Path) -> str | None:
         if header[8:12] == b"WAVE":
             return "audio/wav"
     if header[4:8] == b"ftyp":
+        # ISO base media: the brand distinguishes still images from audio.
+        brand = header[8:12]
+        if brand in {b"avif", b"avis"}:
+            return "image/avif"
+        if brand in {b"heic", b"heix", b"heim", b"heis", b"mif1", b"msf1"}:
+            return "image/heic"
         return "audio/mp4"
     # MPEG audio frame sync, used by mp3 files without an ID3 header.
     if len(header) >= 2 and header[0] == 0xFF and header[1] & 0xE0 == 0xE0:
