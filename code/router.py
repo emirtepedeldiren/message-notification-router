@@ -57,10 +57,17 @@ class Decision:
     source: str = "model"
 
 
-def build_reason_catalogue(dataset: Dataset) -> dict[str, list[str]]:
-    """Group the sample reasons by action so the prompt can offer the right ones."""
+def build_reason_catalogue(dataset: Dataset, exclude_id: str = "") -> dict[str, list[str]]:
+    """Group the sample reasons by action so the prompt can offer the right ones.
+
+    `exclude_id` drops the row being routed. It matters only while evaluating,
+    where a message drawn from the sample pool would otherwise be offered its
+    own gold reason back as a suggestion.
+    """
     catalogue: dict[str, list[str]] = {action: [] for action in ACTIONS}
     for sample in dataset.samples:
+        if sample.message_id == exclude_id:
+            continue
         if sample.action in catalogue and sample.reason:
             if sample.reason not in catalogue[sample.action]:
                 catalogue[sample.action].append(sample.reason)
@@ -84,10 +91,16 @@ def select_examples(dataset: Dataset, message: Message, limit: int = 4) -> list[
     Matching the conversation and media shape first means a voice note is
     shown voice-note examples, which is what keeps the style consistent
     across very different message kinds.
+
+    The message being routed is excluded. It only ever appears in the sample
+    pool while evaluating, and showing the model its own answer would make
+    every dev-set score meaningless.
     """
     query = normalise(message.message_text)
     scored: list[tuple[float, str, Message]] = []
     for sample in dataset.samples:
+        if sample.message_id == message.message_id:
+            continue
         score = 0.0
         if sample.conversation_type == message.conversation_type:
             score += 0.4
@@ -128,7 +141,14 @@ class Router:
         self.dataset = dataset
         self._client = client
         self.model = model or config.ROUTER_MODEL
-        self.catalogue = render_catalogue(build_reason_catalogue(dataset))
+        self._catalogues: dict[str, str] = {}
+
+    def catalogue_for(self, exclude_id: str = "") -> str:
+        if exclude_id not in self._catalogues:
+            self._catalogues[exclude_id] = render_catalogue(
+                build_reason_catalogue(self.dataset, exclude_id)
+            )
+        return self._catalogues[exclude_id]
 
     @property
     def client(self) -> GeminiClient:
@@ -139,7 +159,7 @@ class Router:
     def build_prompt(self, ctx: MessageContext, verdict: RiskVerdict) -> str:
         candidates = [item.message_id for item in ctx.evidence] or ["none available"]
         sections = [
-            self.catalogue,
+            self.catalogue_for(ctx.message.message_id),
             render_examples(select_examples(self.dataset, ctx.message)),
             "# Safety layer verdict",
             verdict.render()
