@@ -220,12 +220,16 @@ class MediaPerceiver:
         self._lock = threading.Lock()
         self._cache: dict[str, dict] = {}
         if cache_path.exists():
-            self._cache = json.loads(cache_path.read_text(encoding="utf-8"))
+            stored = json.loads(cache_path.read_text(encoding="utf-8"))
+            # Only successful descriptions are trustworthy. Dropping the rest on
+            # load means a failure recorded by an older run is retried rather
+            # than served forever as "this file cannot be read".
+            self._cache = {k: v for k, v in stored.items() if v.get("available")}
 
     @property
     def client(self) -> GeminiClient:
         if self._client is None:
-            self._client = GeminiClient()
+            self._client = GeminiClient(per_minute=config.PERCEPTION_REQUESTS_PER_MINUTE)
         return self._client
 
     def _cache_key(self, media_id: str, path: Path) -> str:

@@ -31,6 +31,11 @@ MAX_CONCURRENCY = int(os.environ.get("MAX_CONCURRENCY", "4"))
 REQUESTS_PER_MINUTE = int(os.environ.get("REQUESTS_PER_MINUTE", "12"))
 MAX_RETRIES = int(os.environ.get("MAX_RETRIES", "4"))
 
+# Perception sends whole images and audio files, so it is limited by the
+# free tier's input-tokens-per-minute ceiling rather than its request count.
+# A slower cadence here costs a few minutes once and then lives in the cache.
+PERCEPTION_REQUESTS_PER_MINUTE = int(os.environ.get("PERCEPTION_REQUESTS_PER_MINUTE", "5"))
+
 # Confidence band observed in the labelled examples (0.78 - 0.91). Predictions
 # are kept inside it so calibration stays consistent with the expected output.
 CONFIDENCE_FLOOR = 0.72

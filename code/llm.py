@@ -99,5 +99,5 @@ class GeminiClient:
                     delay = max(delay, 25.0)
                 time.sleep(delay)
 
-        print(f"  ! model call failed after {config.MAX_RETRIES} attempts: {last_error}")
+        print(f"  ! model call failed after {config.MAX_RETRIES} attempts: {last_error}", flush=True)
         return None
