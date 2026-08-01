@@ -220,6 +220,11 @@ class MediaPerceiver:
         if cached is not None:
             return MediaFacts(**cached)
 
+        # Without a key the pipeline still runs; media messages simply route on
+        # their caption, sender and history alone.
+        if not config.has_api_key():
+            return MediaFacts(media_id=media_id, media_type=media_type, available=False)
+
         facts = self._describe(media_id, media_type, path)
         with self._lock:
             self._cache[key] = asdict(facts)
