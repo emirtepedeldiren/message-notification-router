@@ -16,10 +16,12 @@ load_dotenv(REPO_ROOT / ".env")
 
 API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
 
-# Routing model. Flash is the accuracy/quota sweet spot on the free tier;
-# evaluation/main.py compares it against the lite variant and the rule baseline.
+# Model choice is constrained by the free tier's per-model daily allowance, so
+# the two workloads deliberately sit on different models: perception runs once
+# and is cached, routing is the accuracy-critical path.
+# (gemini-3.6-flash allows only 20 requests/day on the free tier — unusable here.)
 ROUTER_MODEL = os.environ.get("ROUTER_MODEL", "gemini-2.5-flash")
-PERCEPTION_MODEL = os.environ.get("PERCEPTION_MODEL", "gemini-2.5-flash")
+PERCEPTION_MODEL = os.environ.get("PERCEPTION_MODEL", "gemini-3.5-flash-lite")
 
 # Deterministic by default so reruns reproduce the submitted output.csv.
 TEMPERATURE = float(os.environ.get("ROUTER_TEMPERATURE", "0"))

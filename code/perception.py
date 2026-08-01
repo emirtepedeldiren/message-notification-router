@@ -115,6 +115,36 @@ MIME_TYPES = {
     ".m4a": "audio/mp4",
 }
 
+# Several files in the dataset carry the wrong extension — three PNGs are named
+# .jpg — and the API rejects a payload whose declared type does not match its
+# bytes. So the content decides the type and the extension is only a fallback.
+MAGIC_SIGNATURES: tuple[tuple[bytes, str], ...] = (
+    (b"\xff\xd8\xff", "image/jpeg"),
+    (b"\x89PNG\r\n\x1a\n", "image/png"),
+    (b"GIF8", "image/gif"),
+    (b"ID3", "audio/mp3"),
+    (b"OggS", "audio/ogg"),
+)
+
+
+def sniff_mime(path: Path) -> str | None:
+    """Determine the media type from the file's own bytes."""
+    header = path.read_bytes()[:16]
+    for signature, mime in MAGIC_SIGNATURES:
+        if header.startswith(signature):
+            return mime
+    if header[:4] == b"RIFF":
+        if header[8:12] == b"WEBP":
+            return "image/webp"
+        if header[8:12] == b"WAVE":
+            return "audio/wav"
+    if header[4:8] == b"ftyp":
+        return "audio/mp4"
+    # MPEG audio frame sync, used by mp3 files without an ID3 header.
+    if len(header) >= 2 and header[0] == 0xFF and header[1] & 0xE0 == 0xE0:
+        return "audio/mp3"
+    return MIME_TYPES.get(path.suffix.lower())
+
 
 @dataclass
 class MediaFacts:
@@ -226,12 +256,15 @@ class MediaPerceiver:
             return MediaFacts(media_id=media_id, media_type=media_type, available=False)
 
         facts = self._describe(media_id, media_type, path)
-        with self._lock:
-            self._cache[key] = asdict(facts)
+        # Only successful descriptions are cached. A transient failure must not
+        # become a permanent "this file cannot be read" entry.
+        if facts.available:
+            with self._lock:
+                self._cache[key] = asdict(facts)
         return facts
 
     def _describe(self, media_id: str, media_type: str, path: Path) -> MediaFacts:
-        mime = MIME_TYPES.get(path.suffix.lower())
+        mime = sniff_mime(path)
         if mime is None:
             return MediaFacts(media_id=media_id, media_type=media_type, available=False)
 

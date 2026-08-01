@@ -14,6 +14,10 @@ import time
 import config
 
 
+class QuotaExhausted(RuntimeError):
+    """The model's daily free-tier allowance is gone; waiting will not help."""
+
+
 class RateLimiter:
     """Spaces requests out to stay under a requests-per-minute ceiling."""
 
@@ -81,12 +85,18 @@ class GeminiClient:
                 return json.loads(text)
             except Exception as exc:  # noqa: BLE001 - retry on anything transient
                 last_error = exc
+                message = str(exc)
+                # A daily quota does not refill within a retry window, and each
+                # attempt still counts against it. Fail fast instead of
+                # spending four calls to learn the same thing.
+                if "PerDay" in message:
+                    raise QuotaExhausted(f"daily free-tier quota exhausted for {model}") from exc
                 if attempt == config.MAX_RETRIES - 1:
                     break
-                # Exponential backoff with jitter; quota errors need the longest wait.
+                # Exponential backoff with jitter; per-minute limits need longer.
                 delay = (2**attempt) + random.uniform(0, 1)
-                if "RESOURCE_EXHAUSTED" in str(exc) or "429" in str(exc):
-                    delay = max(delay, 20.0)
+                if "RESOURCE_EXHAUSTED" in message or "429" in message:
+                    delay = max(delay, 25.0)
                 time.sleep(delay)
 
         print(f"  ! model call failed after {config.MAX_RETRIES} attempts: {last_error}")
