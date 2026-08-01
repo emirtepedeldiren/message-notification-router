@@ -1092,5 +1092,356 @@
       "Similar historical promotional messages were dismissed or muted by this user."
     ],
     "source": "model"
+  },
+  "msg_072": {
+    "message_id": "msg_072",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "The message asks for urgent OTP or account verification through a suspicious flow.",
+    "confidence": 0.91,
+    "evidence_message_ids": "message_0085",
+    "key_signals": [
+      "Safety layer verdict mandates muting due to OTP/credential phishing and lookalike domain.",
+      "The message asks for urgent OTP or account verification through a suspicious flow."
+    ],
+    "source": "model"
+  },
+  "msg_036": {
+    "message_id": "msg_036",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "Similar historical messages were ignored, dismissed, or muted by this user.",
+    "confidence": 0.9,
+    "evidence_message_ids": "message_0283;message_0127",
+    "key_signals": [
+      "The safety layer and sender history indicate a suspicious phishing attempt using a domain mismatch.",
+      "Similar historical messages from this sender were dismissed, muted, or reported by the user."
+    ],
+    "source": "model"
+  },
+  "msg_076": {
+    "message_id": "msg_076",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "Similar historical messages were ignored, dismissed, or muted by this user.",
+    "confidence": 0.91,
+    "evidence_message_ids": "message_0208;message_0207",
+    "key_signals": [
+      "Safety layer verdict mandates muting due to phishing risk and domain mismatch.",
+      "User history shows repeated dismissals and reports for similar messages from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_055": {
+    "message_id": "msg_055",
+    "action": "notify",
+    "message_type": "urgent",
+    "reason": "A close contact sent a short urgent request that should interrupt the user.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0166",
+    "key_signals": [
+      "A close contact sent a short urgent request that should interrupt the user.",
+      "The user has a history of replying to urgent messages from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_102": {
+    "message_id": "msg_102",
+    "action": "notify",
+    "message_type": "urgent",
+    "reason": "The message is from a work context and contains a direct deadline or meeting dependency.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0371;message_0230",
+    "key_signals": [
+      "The message is from a work context and contains a direct deadline or meeting dependency.",
+      "The user has a history of engaging with similar work messages from this established sender."
+    ],
+    "source": "model"
+  },
+  "msg_080": {
+    "message_id": "msg_080",
+    "action": "notify",
+    "message_type": "urgent",
+    "reason": "A trusted group admin sent a time-sensitive update that should interrupt the user.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0130",
+    "key_signals": [
+      "A trusted group admin sent a time-sensitive update that requires immediate action to avoid inconvenience.",
+      "The user has a consistent history of engaging with similar operational notices from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_093": {
+    "message_id": "msg_093",
+    "action": "digest",
+    "message_type": "business_update",
+    "reason": "The verified business message is legitimate but does not require immediate attention.",
+    "confidence": 0.82,
+    "evidence_message_ids": "message_0349",
+    "key_signals": [
+      "The message arrives inside the user's do-not-disturb hours.",
+      "The user has no recorded relationship with this business."
+    ],
+    "source": "model"
+  },
+  "msg_034": {
+    "message_id": "msg_034",
+    "action": "mute",
+    "message_type": "greeting",
+    "reason": "The sender has a pattern of repeated forwards or greetings that the user usually ignores.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0013;message_0077",
+    "key_signals": [
+      "The user has a history of dismissing similar greetings and forward messages from this sender.",
+      "The group is muted and the message is a routine greeting without urgency."
+    ],
+    "source": "model"
+  },
+  "msg_035": {
+    "message_id": "msg_035",
+    "action": "digest",
+    "message_type": "business_update",
+    "reason": "A verified business is sending a legitimate but non-urgent update.",
+    "confidence": 0.82,
+    "evidence_message_ids": "message_0281",
+    "key_signals": [
+      "Established relationship with a verified business for payment stack interest",
+      "User has a history of opening similar business updates"
+    ],
+    "source": "model"
+  },
+  "msg_101": {
+    "message_id": "msg_101",
+    "action": "digest",
+    "message_type": "personal",
+    "reason": "The message is safe casual chat with no urgent action required.",
+    "confidence": 0.84,
+    "evidence_message_ids": "message_0370",
+    "key_signals": [
+      "A close contact sent a non-urgent personal message during do-not-disturb hours.",
+      "The user has a demonstrated history of opening similar messages from this established sender."
+    ],
+    "source": "model"
+  },
+  "msg_041": {
+    "message_id": "msg_041",
+    "action": "digest",
+    "message_type": "business_update",
+    "reason": "The verified business message is legitimate but does not require immediate attention.",
+    "confidence": 0.82,
+    "evidence_message_ids": "message_0137;message_0138",
+    "key_signals": [
+      "Similar historical messages were opened by this user.",
+      "The verified business message is legitimate but does not require immediate attention."
+    ],
+    "source": "model"
+  },
+  "msg_011": {
+    "message_id": "msg_011",
+    "action": "mute",
+    "message_type": "greeting",
+    "reason": "Similar historical messages were ignored, dismissed, or muted by this user.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0014",
+    "key_signals": [
+      "Similar historical messages were dismissed or muted by this user.",
+      "The message is a chain forward greeting."
+    ],
+    "source": "model"
+  },
+  "msg_110": {
+    "message_id": "msg_110",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "Similar historical messages were ignored, dismissed, or muted by this user.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0238;message_0381",
+    "key_signals": [
+      "The message asks for sensitive verification or payment.",
+      "Similar historical messages were ignored, dismissed, or muted by this user."
+    ],
+    "source": "model"
+  },
+  "msg_095": {
+    "message_id": "msg_095",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "Similar historical messages were ignored, dismissed, or muted by this user.",
+    "confidence": 0.9,
+    "evidence_message_ids": "message_0087;message_0183",
+    "key_signals": [
+      "Safety layer verdict mandates muting due to phishing and instruction manipulation attempts.",
+      "The sender has a history of similar messages that the user dismissed and reported."
+    ],
+    "source": "model"
+  },
+  "msg_074": {
+    "message_id": "msg_074",
+    "action": "mute",
+    "message_type": "promotion",
+    "reason": "Similar historical messages were ignored, dismissed, or muted by this user.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0203;message_0204",
+    "key_signals": [
+      "Similar historical messages were ignored, dismissed, or muted by this user.",
+      "The user has muted this group and has a history of dismissing marketing messages from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_073": {
+    "message_id": "msg_073",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "Similar historical messages were ignored, dismissed, or muted by this user.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0087",
+    "key_signals": [
+      "Security check and account restriction threat with urgency language.",
+      "User has consistently dismissed or muted previous messages from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_054": {
+    "message_id": "msg_054",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "Similar historical messages were ignored, dismissed, or muted by this user.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0164;message_0389",
+    "key_signals": [
+      "The sender has a history of sending financial scam messages that the user previously dismissed and reported.",
+      "The message demands payment through a suspicious link with artificial urgency."
+    ],
+    "source": "model"
+  },
+  "msg_068": {
+    "message_id": "msg_068",
+    "action": "digest",
+    "message_type": "personal",
+    "reason": "The message is safe casual chat with no urgent action required.",
+    "confidence": 0.83,
+    "evidence_message_ids": "message_0191;message_0192",
+    "key_signals": [
+      "The sender is established and has a history of similar non-urgent messages that the user consistently engages with.",
+      "The message discusses a casual plan with no urgent action required."
+    ],
+    "source": "model"
+  },
+  "msg_100": {
+    "message_id": "msg_100",
+    "action": "notify",
+    "message_type": "urgent",
+    "reason": "The message is from a work context and contains a direct deadline or meeting dependency.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0228",
+    "key_signals": [
+      "The message comes from an established work contact with a history of direct operational dependencies.",
+      "The text contains a time-sensitive deadline with an impending client escalation."
+    ],
+    "source": "model"
+  },
+  "msg_062": {
+    "message_id": "msg_062",
+    "action": "digest",
+    "message_type": "event",
+    "reason": "A school admin sent a same-day operational update that the user is likely to need immediately.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0043",
+    "key_signals": [
+      "A trusted group admin sent a same-day operational update regarding a building test.",
+      "The user has a history of replying to similar service and safety notices from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_096": {
+    "message_id": "msg_096",
+    "action": "notify",
+    "message_type": "personal",
+    "reason": "A close contact sent a short urgent request that should interrupt the user.",
+    "confidence": 0.81,
+    "evidence_message_ids": "message_0353",
+    "key_signals": [
+      "The message informs the user that their passport was found and asks them to retrieve it before 18h.",
+      "The sender is unfamiliar, but the message contains a time-sensitive real-world retrieval request without payment pressure or scam indicators."
+    ],
+    "source": "model"
+  },
+  "msg_043": {
+    "message_id": "msg_043",
+    "action": "notify",
+    "message_type": "urgent",
+    "reason": "A trusted group admin sent a time-sensitive update that should interrupt the user.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0130;message_0269",
+    "key_signals": [
+      "A trusted group admin sent a time-sensitive update.",
+      "The user has a history of engaging with similar urgent utility and security notices from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_077": {
+    "message_id": "msg_077",
+    "action": "digest",
+    "message_type": "event",
+    "reason": "A school admin sent a same-day operational update that the user is likely to need immediately.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0403;message_0051",
+    "key_signals": [
+      "School admin sent a same-day operational deadline update",
+      "User has a history of replying to similar messages from this sender"
+    ],
+    "source": "model"
+  },
+  "msg_081": {
+    "message_id": "msg_081",
+    "action": "notify",
+    "message_type": "event",
+    "reason": "A school admin sent a same-day operational update that the user is likely to need immediately.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0217",
+    "key_signals": [
+      "School transport sent a same-day pickup change with a specific afternoon deadline.",
+      "Similar historical messages from this sender were engaged with by the user."
+    ],
+    "source": "model"
+  },
+  "msg_025": {
+    "message_id": "msg_025",
+    "action": "notify",
+    "message_type": "business_update",
+    "reason": "A verified business is sending an update that matches the user's recent order history.",
+    "confidence": 0.91,
+    "evidence_message_ids": "message_0004;message_0239",
+    "key_signals": [
+      "A verified business is sending an update that matches the user's recent order history.",
+      "Similar historical messages from this business were consistently engaged with by the user."
+    ],
+    "source": "model"
+  },
+  "msg_084": {
+    "message_id": "msg_084",
+    "action": "mute",
+    "message_type": "promotion",
+    "reason": "The user has opted out of or repeatedly dismissed similar marketing messages.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0220",
+    "key_signals": [
+      "The user has opted out of marketing promotions from this business.",
+      "Similar historical messages were dismissed or muted."
+    ],
+    "source": "model"
+  },
+  "msg_022": {
+    "message_id": "msg_022",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "Similar historical messages were ignored, dismissed, or muted by this user.",
+    "confidence": 0.9,
+    "evidence_message_ids": "message_0151;message_0152",
+    "key_signals": [
+      "Unverified sender asking for payment through external links with a history of similar dismissed and reported scam messages.",
+      "User historical behavior shows consistent dismissal and reporting of this type of payment-pressure message."
+    ],
+    "source": "model"
   }
 }

@@ -1,0 +1,111 @@
+message_id,action,message_type,reason,confidence,evidence_message_ids
+msg_023,notify,payment,A verified business is sending an important account or payment update that matches the user's history.,0.9,message_0243
+msg_091,mute,scam,The message asks for urgent OTP or account verification through a suspicious flow.,0.93,message_0238;message_0381
+msg_090,digest,unknown,"The sender is unfamiliar, but the message does not show urgency, payment pressure, or safety risk.",0.83,none
+msg_048,mute,scam,The message uses fake support language and account-blocking pressure to push the user into action.,0.93,message_0151
+msg_040,mute,forward,The sender has a pattern of repeated forwards or greetings that the user usually ignores.,0.88,message_0136;message_0135
+msg_075,notify,business_update,A verified business is sending an update that matches the user's recent order history.,0.91,message_0206
+msg_005,notify,personal,The sender directly asks this user for a response or action.,0.91,message_0065
+msg_104,mute,personal,"Similar historical messages were ignored, dismissed, or muted by this user.",0.9,message_0224;message_0050
+msg_069,mute,greeting,The sender has a pattern of repeated forwards or greetings that the user usually ignores.,0.9,message_0193;message_0194
+msg_107,mute,scam,"The message tries to instruct the router, but the routing decision should be based on the actual content and risk.",0.93,message_0213;message_0056
+msg_070,mute,scam,The message asks for urgent OTP or account verification through a suspicious flow.,0.93,message_0369;message_0213
+msg_003,notify,business_update,A verified business is sending an update that matches the user's recent order history.,0.91,message_0031;message_0400
+msg_099,digest,personal,"The sender is trusted, but the message has no urgent action or safety relevance.",0.88,message_0227
+msg_008,digest,business_update,A verified business is sending a legitimate but non-urgent update.,0.88,message_0296;message_0072
+msg_092,digest,business_update,The verified business message is legitimate but does not require immediate attention.,0.88,message_0346
+msg_060,notify,event,A school admin sent a same-day operational update that the user is likely to need immediately.,0.91,message_0176;message_0284
+msg_004,notify,event,A verified business is sending a reminder that matches the user's recent booking history.,0.91,message_0245;message_0005
+msg_030,mute,promotion,"Similar historical messages were ignored, dismissed, or muted by this user.",0.89,message_0115;message_0335
+msg_045,notify,urgent,The sender directly asks this user for a response or action.,0.91,message_0146;message_0031
+msg_052,mute,scam,"Similar historical messages were ignored, dismissed, or muted by this user.",0.93,message_0208;message_0207
+msg_009,digest,personal,The message is safe casual chat with no urgent action required.,0.82,message_0074
+msg_071,digest,personal,"The sender is trusted, but the message has no urgent action or safety relevance.",0.81,message_0197
+msg_016,mute,scam,The message uses fake support language and account-blocking pressure to push the user into action.,0.91,message_0024
+msg_065,notify,promotion,A verified business is sending an update that matches the user's recent order history.,0.88,message_0261;message_0185
+msg_038,mute,spam,"Similar historical messages were ignored, dismissed, or muted by this user.",0.9,message_0131;message_0132
+msg_086,notify,business_update,A verified business is sending an update that matches the user's recent booking history.,0.89,message_0222
+msg_014,mute,promotion,The user has opted out of or repeatedly dismissed similar marketing messages.,0.9,message_0017;message_0018
+msg_094,mute,promotion,The user has opted out of or repeatedly dismissed similar marketing messages.,0.88,message_0356
+msg_029,digest,promotion,The message is promotional but matches a topic or business the user has opted into.,0.86,message_0113
+msg_105,mute,forward,"Similar historical messages were ignored, dismissed, or muted by this user.",0.88,message_0233;message_0373
+msg_002,notify,urgent,The message is from a work context and contains a direct deadline or meeting dependency.,0.89,message_0169;message_0003
+msg_010,digest,business_update,A verified business is sending a legitimate but non-urgent update.,0.85,message_0011;message_0076
+msg_078,mute,scam,"Similar historical messages were ignored, dismissed, or muted by this user.",0.9,message_0211;message_0212
+msg_013,mute,promotion,"Similar historical messages were ignored, dismissed, or muted by this user.",0.85,message_0081;message_0082
+msg_018,mute,scam,"Similar historical messages were ignored, dismissed, or muted by this user.",0.91,message_0026
+msg_044,mute,scam,The message asks for urgent OTP or account verification through a suspicious flow.,0.9,message_0143
+msg_032,notify,personal,The sender directly asks this user for a response or action.,0.88,message_0119;message_0285
+msg_106,notify,event,A close contact sent a short urgent request that should interrupt the user.,0.88,message_0234
+msg_006,notify,event,A trusted group admin sent a time-sensitive update that should interrupt the user.,0.89,message_0029;message_0044
+msg_109,mute,scam,The message uses fake support language and account-blocking pressure to push the user into action.,0.9,message_0151
+msg_108,mute,scam,The message uses fake support language and account-blocking pressure to push the user into action.,0.91,message_0094
+msg_019,mute,scam,The message uses fake support language and account-blocking pressure to push the user into action.,0.91,message_0094;message_0093
+msg_088,mute,personal,"Similar historical messages were ignored, dismissed, or muted by this user.",0.89,message_0224;message_0115
+msg_056,notify,urgent,The sender directly asks this user for a response or action.,0.88,message_0168
+msg_027,digest,promotion,The message is promotional but matches a topic or business the user has opted into.,0.88,message_0272
+msg_050,notify,event,A verified business is sending an update that matches the user's recent order history.,0.91,message_0279;message_0155
+msg_083,digest,business_update,"The message is useful group information, but it is not urgent enough to interrupt the user.",0.84,message_0219
+msg_063,mute,scam,"Similar historical messages were ignored, dismissed, or muted by this user.",0.9,message_0182;message_0181
+msg_033,notify,personal,A close contact sent a short urgent request that should interrupt the user.,0.85,message_0372
+msg_061,mute,greeting,"Similar historical messages were ignored, dismissed, or muted by this user.",0.88,message_0193;message_0194
+msg_020,mute,scam,The message uses fake support language and account-blocking pressure to push the user into action.,0.85,message_0095
+msg_017,mute,scam,"Similar historical messages were ignored, dismissed, or muted by this user.",0.89,message_0090;message_0089
+msg_058,mute,forward,"Similar historical messages were ignored, dismissed, or muted by this user.",0.89,message_0078
+msg_026,mute,scam,The message uses fake support language and account-blocking pressure to push the user into action.,0.91,message_0032
+msg_047,notify,business_update,A trusted group admin sent a time-sensitive update that should interrupt the user.,0.89,message_0150;message_0149
+msg_046,mute,scam,The message asks for urgent OTP or account verification through a suspicious flow.,0.9,message_0147
+msg_042,notify,urgent,A trusted group admin sent a time-sensitive update that should interrupt the user.,0.89,message_0140
+msg_079,mute,scam,The message asks for urgent OTP or account verification through a suspicious flow.,0.9,message_0213
+msg_098,notify,urgent,A close contact sent a short urgent request that should interrupt the user.,0.89,message_0226
+msg_037,notify,event,A trusted group admin sent a time-sensitive update that should interrupt the user.,0.89,message_0269
+msg_007,digest,event,"The message is useful group information, but it is not urgent enough to interrupt the user.",0.84,message_0070
+msg_085,mute,scam,The message asks for urgent OTP or account verification through a suspicious flow.,0.93,message_0221
+msg_001,notify,urgent,A trusted group admin sent a time-sensitive update that should interrupt the user.,0.89,message_0057
+msg_021,notify,urgent,A trusted group admin sent a time-sensitive update that should interrupt the user.,0.86,message_0130
+msg_028,mute,promotion,The user has opted out of or repeatedly dismissed similar marketing messages.,0.89,message_0034;message_0112
+msg_012,mute,forward,The sender has a pattern of repeated forwards or greetings that the user usually ignores.,0.89,message_0247;message_0194
+msg_064,mute,scam,"Similar historical messages were ignored, dismissed, or muted by this user.",0.91,message_0087
+msg_103,notify,personal,A close contact sent a short urgent request that should interrupt the user.,0.88,message_0065;message_0382
+msg_031,notify,business_update,The message is from a work context and contains a direct deadline or meeting dependency.,0.89,message_0249;message_0117
+msg_057,notify,urgent,The message is from a work context and contains a direct deadline or meeting dependency.,0.89,message_0169;message_0003
+msg_087,mute,promotion,The user has opted out of or repeatedly dismissed similar marketing messages.,0.91,message_0223;message_0204
+msg_067,notify,payment,A trusted group admin sent a time-sensitive update that should interrupt the user.,0.88,message_0029
+msg_039,notify,urgent,A school admin sent a same-day operational update that the user is likely to need immediately.,0.89,message_0037
+msg_082,notify,urgent,The message is from a work context and contains a direct deadline or meeting dependency.,0.89,message_0218;message_0380
+msg_066,mute,promotion,The user has opted out of or repeatedly dismissed similar marketing messages.,0.88,message_0402;message_0188
+msg_049,notify,business_update,A verified business is sending a reminder that matches the user's recent booking history.,0.91,message_0291
+msg_015,mute,scam,The message asks for urgent OTP or account verification through a suspicious flow.,0.91,message_0085
+msg_051,mute,promotion,The user has opted out of or repeatedly dismissed similar marketing messages.,0.88,message_0257;message_0103
+msg_097,digest,personal,"The sender is trusted, but the message has no urgent action or safety relevance.",0.82,message_0054
+msg_089,notify,event,A verified business is sending an update that matches the user's recent order history.,0.8,none
+msg_053,digest,business_update,"The sender is trusted, but the message has no urgent action or safety relevance.",0.85,message_0411;message_0253
+msg_059,mute,scam,The message asks for urgent OTP or account verification through a suspicious flow.,0.9,message_0213
+msg_024,mute,promotion,The user has opted out of or repeatedly dismissed similar marketing messages.,0.88,message_0257;message_0103
+msg_072,mute,scam,The message asks for urgent OTP or account verification through a suspicious flow.,0.91,message_0085
+msg_036,mute,scam,"Similar historical messages were ignored, dismissed, or muted by this user.",0.9,message_0283;message_0127
+msg_076,mute,scam,"Similar historical messages were ignored, dismissed, or muted by this user.",0.91,message_0208;message_0207
+msg_055,notify,urgent,A close contact sent a short urgent request that should interrupt the user.,0.88,message_0166
+msg_102,notify,urgent,The message is from a work context and contains a direct deadline or meeting dependency.,0.88,message_0371;message_0230
+msg_080,notify,urgent,A trusted group admin sent a time-sensitive update that should interrupt the user.,0.89,message_0130
+msg_093,digest,business_update,The verified business message is legitimate but does not require immediate attention.,0.82,message_0349
+msg_034,mute,greeting,The sender has a pattern of repeated forwards or greetings that the user usually ignores.,0.88,message_0013;message_0077
+msg_035,digest,business_update,A verified business is sending a legitimate but non-urgent update.,0.82,message_0281
+msg_101,digest,personal,The message is safe casual chat with no urgent action required.,0.84,message_0370
+msg_041,digest,business_update,The verified business message is legitimate but does not require immediate attention.,0.82,message_0137;message_0138
+msg_011,mute,greeting,"Similar historical messages were ignored, dismissed, or muted by this user.",0.88,message_0014
+msg_110,mute,scam,"Similar historical messages were ignored, dismissed, or muted by this user.",0.89,message_0238;message_0381
+msg_095,mute,scam,"Similar historical messages were ignored, dismissed, or muted by this user.",0.9,message_0087;message_0183
+msg_074,mute,promotion,"Similar historical messages were ignored, dismissed, or muted by this user.",0.89,message_0203;message_0204
+msg_073,mute,scam,"Similar historical messages were ignored, dismissed, or muted by this user.",0.89,message_0087
+msg_054,mute,scam,"Similar historical messages were ignored, dismissed, or muted by this user.",0.88,message_0164;message_0389
+msg_068,digest,personal,The message is safe casual chat with no urgent action required.,0.83,message_0191;message_0192
+msg_100,notify,urgent,The message is from a work context and contains a direct deadline or meeting dependency.,0.88,message_0228
+msg_062,digest,event,A school admin sent a same-day operational update that the user is likely to need immediately.,0.88,message_0043
+msg_096,notify,personal,A close contact sent a short urgent request that should interrupt the user.,0.81,message_0353
+msg_043,notify,urgent,A trusted group admin sent a time-sensitive update that should interrupt the user.,0.89,message_0130;message_0269
+msg_077,digest,event,A school admin sent a same-day operational update that the user is likely to need immediately.,0.89,message_0403;message_0051
+msg_081,notify,event,A school admin sent a same-day operational update that the user is likely to need immediately.,0.88,message_0217
+msg_025,notify,business_update,A verified business is sending an update that matches the user's recent order history.,0.91,message_0004;message_0239
+msg_084,mute,promotion,The user has opted out of or repeatedly dismissed similar marketing messages.,0.89,message_0220
+msg_022,mute,scam,"Similar historical messages were ignored, dismissed, or muted by this user.",0.9,message_0151;message_0152
