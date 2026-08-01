@@ -220,5 +220,97 @@
       "The message contains time-sensitive health information regarding an appointment or prescription."
     ],
     "source": "model"
+  },
+  "msg_099": {
+    "message_id": "msg_099",
+    "action": "digest",
+    "message_type": "personal",
+    "reason": "The sender is trusted, but the message has no urgent action or safety relevance.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0227",
+    "key_signals": [
+      "Sender is a trusted contact with a history of work-related collaboration",
+      "Message explicitly states it is not blocking for tonight",
+      "User has a 100% engagement rate with this sender's previous messages"
+    ],
+    "source": "model"
+  },
+  "msg_045": {
+    "message_id": "msg_045",
+    "action": "notify",
+    "message_type": "urgent",
+    "reason": "The sender directly asks this user for a response or action.",
+    "confidence": 0.91,
+    "evidence_message_ids": "message_0146;message_0031",
+    "key_signals": [
+      "The message contains a time-sensitive delivery request requiring immediate action.",
+      "The user has a consistent history of engaging with time-sensitive operational and delivery updates."
+    ],
+    "source": "model"
+  },
+  "msg_030": {
+    "message_id": "msg_030",
+    "action": "mute",
+    "message_type": "promotion",
+    "reason": "Similar historical messages were ignored, dismissed, or muted by this user.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0115;message_0335",
+    "key_signals": [
+      "Similar historical messages from this sender were consistently dismissed or muted by the user.",
+      "The user has muted this group and has a high dismissal rate for similar marketplace offers."
+    ],
+    "source": "model"
+  },
+  "msg_052": {
+    "message_id": "msg_052",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "Similar historical messages were ignored, dismissed, or muted by this user.",
+    "confidence": 0.93,
+    "evidence_message_ids": "message_0208;message_0207",
+    "key_signals": [
+      "Safety layer verdict mandates muting due to phishing domain and user reports",
+      "Similar historical messages were dismissed and reported by the user"
+    ],
+    "source": "model"
+  },
+  "msg_009": {
+    "message_id": "msg_009",
+    "action": "digest",
+    "message_type": "personal",
+    "reason": "The message is safe casual chat with no urgent action required.",
+    "confidence": 0.82,
+    "evidence_message_ids": "message_0074",
+    "key_signals": [
+      "The message is safe casual chat with no urgent action required.",
+      "User historically engages with similar messages from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_071": {
+    "message_id": "msg_071",
+    "action": "digest",
+    "message_type": "personal",
+    "reason": "The sender is trusted, but the message has no urgent action or safety relevance.",
+    "confidence": 0.81,
+    "evidence_message_ids": "message_0197",
+    "key_signals": [
+      "The sender is an established contact with a history of engagement from the user.",
+      "The message discusses a tentative meeting or plan without an urgent deadline or direct call to action."
+    ],
+    "source": "model"
+  },
+  "msg_016": {
+    "message_id": "msg_016",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "The message uses fake support language and account-blocking pressure to push the user into action.",
+    "confidence": 0.91,
+    "evidence_message_ids": "message_0024",
+    "key_signals": [
+      "Safety layer verdict points to a lookalike verification domain and requires muting.",
+      "The message uses fake support language and account-blocking pressure to push the user into action."
+    ],
+    "source": "model"
   }
 }
