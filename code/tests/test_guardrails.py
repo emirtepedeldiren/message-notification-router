@@ -176,3 +176,55 @@ class TestQuietHourWindows:
     def test_no_window_means_never_quiet(self):
         user = User("u_x", None, 0, 0, 0, 0)
         assert not user.in_quiet_hours(datetime(2026, 7, 31, 3, 0))
+
+
+class TestCoherenceWithLabelledConvention:
+    """Combinations the labelled examples never produce."""
+
+    def test_a_promotion_never_interrupts(self, dataset):
+        message = make_message(
+            conversation_type="business",
+            business_id="business_067",
+            sender_user_id="",
+            message_text=(
+                "A limited shopping benefit is available on items you recently viewed. "
+                "Check the details in the app before the offer expires. Reply STOP to unsubscribe"
+            ),
+        )
+        result = route(dataset, message, Decision(action="notify", message_type="promotion", reason="x", confidence=0.88))
+        assert result.action == "digest"
+
+    def test_a_direct_question_is_held_back_not_silenced(self, dataset):
+        """History of ignoring someone's sale posts should not mute their question."""
+        message = make_message(
+            user_id="u_033",
+            conversation_type="personal",
+            sender_user_id="u_048",
+            message_text=(
+                "Hi, I kept the blue denim jacket aside for you. Can you collect it from Gate 2 "
+                "by 6 PM? Two other people are asking, so tell me honestly if you can't make it."
+            ),
+        )
+        result = route(dataset, message, Decision(action="mute", message_type="personal", reason="x", confidence=0.89))
+        assert result.action == "digest"
+
+    def test_risk_still_silences_a_one_to_one_conversation(self, dataset):
+        message = make_message(
+            conversation_type="personal",
+            message_text="Share the OTP sent to your phone now or your account will be blocked today.",
+        )
+        result = route(dataset, message, Decision(action="digest", message_type="personal", reason="x", confidence=0.8))
+        assert result.action == "mute"
+        assert result.message_type == "scam"
+
+    def test_group_broadcasts_can_still_be_muted(self, dataset):
+        """The one-to-one rule must not leak into group traffic."""
+        message = make_message(
+            user_id="u_033",
+            conversation_type="group",
+            group_id="group_005",
+            sender_user_id="u_048",
+            message_text="Selling a barely used kurta set, size M. Pickup near Gate 2 this weekend.",
+        )
+        result = route(dataset, message, Decision(action="mute", message_type="promotion", reason="x", confidence=0.85))
+        assert result.action == "mute"

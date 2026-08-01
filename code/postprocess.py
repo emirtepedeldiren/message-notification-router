@@ -176,7 +176,27 @@ def finalise(
         adjustments.append(Adjustment("coherence", f"{message_type} cannot notify; downgraded to digest"))
         action = "digest"
 
-    # 3. A promotion from a business the user opted out of is unwanted by definition.
+    # 3. Marketing never interrupts. Even a well-targeted offer is something
+    # the user can read later, and every labelled promotion is digest or mute.
+    if action == "notify" and message_type == "promotion":
+        adjustments.append(Adjustment("coherence", "promotional content does not warrant an interruption"))
+        action = "digest"
+
+    # 4. A one-to-one conversation is not silenced on engagement history alone.
+    # Muting a person the user actually talks to risks losing a direct question
+    # — "can you collect it by 6, tell me honestly if you can't" — because
+    # their earlier sale posts went unread. Risk findings still override this.
+    if (
+        action == "mute"
+        and not verdict.forces_mute
+        and ctx.message.conversation_type == "personal"
+        and message_type not in SUPPRESSED_TYPES
+        and message_type not in {"promotion", "forward", "greeting"}
+    ):
+        adjustments.append(Adjustment("one-to-one", "direct conversation held back rather than silenced"))
+        action = "digest"
+
+    # 5. A promotion from a business the user opted out of is unwanted by definition.
     if (
         action != "mute"
         and message_type == "promotion"
@@ -186,12 +206,12 @@ def finalise(
         adjustments.append(Adjustment("opt-out", "user opted out of promotions from this business"))
         action = "mute"
 
-    # 4. A muted group only breaks through for a direct address or a real emergency.
+    # 6. A muted group only breaks through for a direct address or a real emergency.
     if action == "notify" and ctx.group_muted and not ctx.directly_mentioned and message_type != "urgent":
         adjustments.append(Adjustment("muted-group", "user muted this group and was not addressed directly"))
         action = "digest"
 
-    # 5. Do-not-disturb hours.
+    # 7. Do-not-disturb hours.
     # No labelled example falls inside a DND window, so this stays deliberately
     # narrow: genuinely urgent, directly addressed, and personal messages still
     # interrupt. Ablated in the evaluation as `quiet_hours`.
@@ -206,7 +226,7 @@ def finalise(
         adjustments.append(Adjustment("quiet-hours", "arrives inside the user's do-not-disturb window"))
         action = "digest"
 
-    # 6. Evidence must point at real history this user actually has.
+    # 8. Evidence must point at real history this user actually has.
     evidence_ids = _valid_evidence(ctx, decision.evidence_message_ids)
     if not evidence_ids and ctx.evidence:
         fallback = format_evidence_ids(ctx.evidence)
@@ -215,7 +235,7 @@ def finalise(
             adjustments.append(Adjustment("evidence", "model gave no usable ids; used top retrieval hit"))
     evidence = ";".join(evidence_ids) if evidence_ids else "none"
 
-    # 7. Calibration. Agreement between the rule layer and the model earns
+    # 9. Calibration. Agreement between the rule layer and the model earns
     # confidence; disagreement costs it.
     if verdict.forces_mute and decision.source == "model":
         confidence = max(confidence, 0.85)

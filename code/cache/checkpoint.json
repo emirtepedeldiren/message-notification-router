@@ -481,5 +481,239 @@
       "Message uses account-blocking pressure and asks for verification"
     ],
     "source": "model"
+  },
+  "msg_032": {
+    "message_id": "msg_032",
+    "action": "notify",
+    "message_type": "personal",
+    "reason": "The sender directly asks this user for a response or action.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0119;message_0285",
+    "key_signals": [
+      "The message asks for study material from a sender the user consistently engages with.",
+      "The user has an established pattern of opening and replying to similar requests from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_106": {
+    "message_id": "msg_106",
+    "action": "notify",
+    "message_type": "event",
+    "reason": "A close contact sent a short urgent request that should interrupt the user.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0234",
+    "key_signals": [
+      "A close contact sent a short urgent request that should interrupt the user.",
+      "User historically engages with comparable messages from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_006": {
+    "message_id": "msg_006",
+    "action": "notify",
+    "message_type": "event",
+    "reason": "A trusted group admin sent a time-sensitive update that should interrupt the user.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0029;message_0044",
+    "key_signals": [
+      "A trusted group admin sent a time-sensitive update about maintenance closing today.",
+      "The user has a consistent history of engaging with similar maintenance reminder messages from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_109": {
+    "message_id": "msg_109",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "The message uses fake support language and account-blocking pressure to push the user into action.",
+    "confidence": 0.9,
+    "evidence_message_ids": "message_0151",
+    "key_signals": [
+      "The message uses fake support language and account-blocking pressure to push the user into action.",
+      "Similar historical messages were ignored, dismissed, or muted by this user."
+    ],
+    "source": "model"
+  },
+  "msg_108": {
+    "message_id": "msg_108",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "The message uses fake support language and account-blocking pressure to push the user into action.",
+    "confidence": 0.91,
+    "evidence_message_ids": "message_0094",
+    "key_signals": [
+      "The message uses fake support language and account-blocking pressure to push the user into action.",
+      "Similar historical messages were ignored, dismissed, or muted by this user."
+    ],
+    "source": "model"
+  },
+  "msg_019": {
+    "message_id": "msg_019",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "The message uses fake support language and account-blocking pressure to push the user into action.",
+    "confidence": 0.91,
+    "evidence_message_ids": "message_0094;message_0093",
+    "key_signals": [
+      "Safety layer verdict mandates muting due to unverified sender and phishing risk.",
+      "The message uses fake support language and account-blocking pressure to push the user into action."
+    ],
+    "source": "model"
+  },
+  "msg_088": {
+    "message_id": "msg_088",
+    "action": "mute",
+    "message_type": "personal",
+    "reason": "Similar historical messages were ignored, dismissed, or muted by this user.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0224;message_0115",
+    "key_signals": [
+      "Similar historical messages were ignored, dismissed, or muted by this user.",
+      "The group is muted and the user has a pattern of dismissing messages from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_056": {
+    "message_id": "msg_056",
+    "action": "notify",
+    "message_type": "urgent",
+    "reason": "The sender directly asks this user for a response or action.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0168",
+    "key_signals": [
+      "The message directly @-mentions the user and asks for a confirmation about a doctor appointment.",
+      "The sender is an established family contact with a high engagement history for similar requests."
+    ],
+    "source": "model"
+  },
+  "msg_027": {
+    "message_id": "msg_027",
+    "action": "digest",
+    "message_type": "promotion",
+    "reason": "The message is promotional but matches a topic or business the user has opted into.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0272",
+    "key_signals": [
+      "The user has a demonstrated history of opening similar promotional messages from this business.",
+      "The message is promotional but matches a topic or business the user has opted into."
+    ],
+    "source": "model"
+  },
+  "msg_050": {
+    "message_id": "msg_050",
+    "action": "notify",
+    "message_type": "event",
+    "reason": "A verified business is sending an update that matches the user's recent order history.",
+    "confidence": 0.91,
+    "evidence_message_ids": "message_0279;message_0155",
+    "key_signals": [
+      "A verified business is sending an update that matches the user's recent order history.",
+      "User has a demonstrated history of replying to similar healthcare messages from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_083": {
+    "message_id": "msg_083",
+    "action": "digest",
+    "message_type": "business_update",
+    "reason": "The message is useful group information, but it is not urgent enough to interrupt the user.",
+    "confidence": 0.84,
+    "evidence_message_ids": "message_0219",
+    "key_signals": [
+      "The message is from a work context and contains a direct deadline or meeting dependency.",
+      "The user previously engaged with a similar message from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_063": {
+    "message_id": "msg_063",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "Similar historical messages were ignored, dismissed, or muted by this user.",
+    "confidence": 0.9,
+    "evidence_message_ids": "message_0182;message_0181",
+    "key_signals": [
+      "The message uses urgency language and demands payment to avoid an account lock.",
+      "Similar historical messages from this sender involved scams and were dismissed or reported."
+    ],
+    "source": "model"
+  },
+  "msg_033": {
+    "message_id": "msg_033",
+    "action": "notify",
+    "message_type": "personal",
+    "reason": "A close contact sent a short urgent request that should interrupt the user.",
+    "confidence": 0.85,
+    "evidence_message_ids": "message_0372",
+    "key_signals": [
+      "A close contact sent a short urgent request that should interrupt the user.",
+      "The sender has an established history of engaged messages from this user."
+    ],
+    "source": "model"
+  },
+  "msg_061": {
+    "message_id": "msg_061",
+    "action": "mute",
+    "message_type": "greeting",
+    "reason": "Similar historical messages were ignored, dismissed, or muted by this user.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0193;message_0194",
+    "key_signals": [
+      "Similar historical messages were ignored, dismissed, or muted by this user.",
+      "The sender has a pattern of repeated forwards or greetings that the user usually ignores."
+    ],
+    "source": "model"
+  },
+  "msg_020": {
+    "message_id": "msg_020",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "The message uses fake support language and account-blocking pressure to push the user into action.",
+    "confidence": 0.85,
+    "evidence_message_ids": "message_0095",
+    "key_signals": [
+      "The message uses fake support language and account-blocking pressure to push the user into action.",
+      "The safety layer verdict indicates elevated risk with a shortened link and urgency from an untrusted sender."
+    ],
+    "source": "model"
+  },
+  "msg_017": {
+    "message_id": "msg_017",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "Similar historical messages were ignored, dismissed, or muted by this user.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0090;message_0089",
+    "key_signals": [
+      "Untrusted sender demanding immediate payment within a muted group",
+      "History of dismissed and reported financial scam messages from this sender"
+    ],
+    "source": "model"
+  },
+  "msg_058": {
+    "message_id": "msg_058",
+    "action": "mute",
+    "message_type": "forward",
+    "reason": "Similar historical messages were ignored, dismissed, or muted by this user.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0078",
+    "key_signals": [
+      "The message is a chain-forward health secret with no direct address.",
+      "Similar historical messages were ignored, dismissed, or muted by this user."
+    ],
+    "source": "model"
+  },
+  "msg_026": {
+    "message_id": "msg_026",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "The message uses fake support language and account-blocking pressure to push the user into action.",
+    "confidence": 0.91,
+    "evidence_message_ids": "message_0032",
+    "key_signals": [
+      "Safety layer verdict mandates muting due to phishing and lookalike domain risk.",
+      "The message uses fake support language and account-blocking pressure to push the user into action."
+    ],
+    "source": "model"
   }
 }
