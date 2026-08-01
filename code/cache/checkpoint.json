@@ -715,5 +715,382 @@
       "The message uses fake support language and account-blocking pressure to push the user into action."
     ],
     "source": "model"
+  },
+  "msg_047": {
+    "message_id": "msg_047",
+    "action": "notify",
+    "message_type": "business_update",
+    "reason": "A trusted group admin sent a time-sensitive update that should interrupt the user.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0150;message_0149",
+    "key_signals": [
+      "A trusted group admin sent a same-day operational maintenance update.",
+      "The user has a strong history of engaging with similar maintenance notices from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_046": {
+    "message_id": "msg_046",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "The message asks for urgent OTP or account verification through a suspicious flow.",
+    "confidence": 0.9,
+    "evidence_message_ids": "message_0147",
+    "key_signals": [
+      "Safety layer verdict mandates muting due to OTP/credential request.",
+      "The message uses fake support language and account-blocking pressure."
+    ],
+    "source": "model"
+  },
+  "msg_042": {
+    "message_id": "msg_042",
+    "action": "notify",
+    "message_type": "urgent",
+    "reason": "A trusted group admin sent a time-sensitive update that should interrupt the user.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0140",
+    "key_signals": [
+      "A trusted group admin sent a time-sensitive update that requires immediate action regarding the driveway.",
+      "The user has a consistent history of replying to similar operational notices from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_079": {
+    "message_id": "msg_079",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "The message asks for urgent OTP or account verification through a suspicious flow.",
+    "confidence": 0.9,
+    "evidence_message_ids": "message_0213",
+    "key_signals": [
+      "Safety layer verdict mandates muting due to OTP/credential harvesting.",
+      "The message demands an immediate OTP under account-blocking pressure."
+    ],
+    "source": "model"
+  },
+  "msg_098": {
+    "message_id": "msg_098",
+    "action": "notify",
+    "message_type": "urgent",
+    "reason": "A close contact sent a short urgent request that should interrupt the user.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0226",
+    "key_signals": [
+      "The sender directly asks this user for a response or action.",
+      "The user has a demonstrated history of engaging with similar urgent appointment updates from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_037": {
+    "message_id": "msg_037",
+    "action": "notify",
+    "message_type": "event",
+    "reason": "A trusted group admin sent a time-sensitive update that should interrupt the user.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0269",
+    "key_signals": [
+      "A trusted group admin sent a time-sensitive update that requires immediate action.",
+      "The user has a history of engaging with similar urgent operational messages from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_007": {
+    "message_id": "msg_007",
+    "action": "digest",
+    "message_type": "event",
+    "reason": "The message is useful group information, but it is not urgent enough to interrupt the user.",
+    "confidence": 0.84,
+    "evidence_message_ids": "message_0070",
+    "key_signals": [
+      "Useful group information that is not urgent enough to interrupt",
+      "Sent by an established sender with past user engagement"
+    ],
+    "source": "model"
+  },
+  "msg_085": {
+    "message_id": "msg_085",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "The message asks for urgent OTP or account verification through a suspicious flow.",
+    "confidence": 0.93,
+    "evidence_message_ids": "message_0221",
+    "key_signals": [
+      "Safety layer verdict: CRITICAL -- this message must be muted for safety.",
+      "The message asks for urgent OTP or account verification through a suspicious flow."
+    ],
+    "source": "model"
+  },
+  "msg_001": {
+    "message_id": "msg_001",
+    "action": "notify",
+    "message_type": "urgent",
+    "reason": "A trusted group admin sent a time-sensitive update that should interrupt the user.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0057",
+    "key_signals": [
+      "A trusted group admin sent a time-sensitive water supply update.",
+      "The user has a consistent history of engaging with similar urgent utility notices from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_021": {
+    "message_id": "msg_021",
+    "action": "notify",
+    "message_type": "urgent",
+    "reason": "A trusted group admin sent a time-sensitive update that should interrupt the user.",
+    "confidence": 0.86,
+    "evidence_message_ids": "message_0130",
+    "key_signals": [
+      "A trusted group admin sent a time-sensitive update that should interrupt the user.",
+      "The sender is an admin of this group and the message contains a direct deadline."
+    ],
+    "source": "model"
+  },
+  "msg_028": {
+    "message_id": "msg_028",
+    "action": "mute",
+    "message_type": "promotion",
+    "reason": "The user has opted out of or repeatedly dismissed similar marketing messages.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0034;message_0112",
+    "key_signals": [
+      "The user opted out of promotions from this business.",
+      "Similar historical messages were dismissed or muted by this user."
+    ],
+    "source": "model"
+  },
+  "msg_012": {
+    "message_id": "msg_012",
+    "action": "mute",
+    "message_type": "forward",
+    "reason": "The sender has a pattern of repeated forwards or greetings that the user usually ignores.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0247;message_0194",
+    "key_signals": [
+      "The sender has a consistent pattern of chain-forward health tips that the user dismisses.",
+      "The user previously dismissed and muted similar messages from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_064": {
+    "message_id": "msg_064",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "Similar historical messages were ignored, dismissed, or muted by this user.",
+    "confidence": 0.91,
+    "evidence_message_ids": "message_0087",
+    "key_signals": [
+      "Safety layer verdict is CRITICAL requiring mute for untrusted payment demands under threat of account or access loss.",
+      "Similar historical messages were dismissed or muted by this user."
+    ],
+    "source": "model"
+  },
+  "msg_103": {
+    "message_id": "msg_103",
+    "action": "notify",
+    "message_type": "personal",
+    "reason": "A close contact sent a short urgent request that should interrupt the user.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0065;message_0382",
+    "key_signals": [
+      "The sender is an established contact with a history of item reservations.",
+      "The message contains a time-sensitive deadline for pickup."
+    ],
+    "source": "model"
+  },
+  "msg_031": {
+    "message_id": "msg_031",
+    "action": "notify",
+    "message_type": "business_update",
+    "reason": "The message is from a work context and contains a direct deadline or meeting dependency.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0249;message_0117",
+    "key_signals": [
+      "The sender is a trusted coworker and group admin with a history of work-related requests that the user regularly replies to.",
+      "The message contains a direct call to action regarding deployment notes and incident summaries for an imminent sync."
+    ],
+    "source": "model"
+  },
+  "msg_057": {
+    "message_id": "msg_057",
+    "action": "notify",
+    "message_type": "urgent",
+    "reason": "The message is from a work context and contains a direct deadline or meeting dependency.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0169;message_0003",
+    "key_signals": [
+      "The message directly @-mentions the user from an established work contact with a high engagement history.",
+      "The message contains a direct dependency and operational urgency regarding a failing build."
+    ],
+    "source": "model"
+  },
+  "msg_087": {
+    "message_id": "msg_087",
+    "action": "mute",
+    "message_type": "promotion",
+    "reason": "The user has opted out of or repeatedly dismissed similar marketing messages.",
+    "confidence": 0.91,
+    "evidence_message_ids": "message_0223;message_0204",
+    "key_signals": [
+      "The user has opted out of or repeatedly dismissed similar marketing messages from this sender.",
+      "The sender is untrusted and the message contains promotional voice content in a muted group."
+    ],
+    "source": "model"
+  },
+  "msg_067": {
+    "message_id": "msg_067",
+    "action": "notify",
+    "message_type": "payment",
+    "reason": "A trusted group admin sent a time-sensitive update that should interrupt the user.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0029",
+    "key_signals": [
+      "Established group admin sent a time-sensitive maintenance payment deadline.",
+      "User has a history of engaging with similar operational payment reminders from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_039": {
+    "message_id": "msg_039",
+    "action": "notify",
+    "message_type": "urgent",
+    "reason": "A school admin sent a same-day operational update that the user is likely to need immediately.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0037",
+    "key_signals": [
+      "A school admin sent a same-day operational payment deadline directly mentioning the user.",
+      "The user has a history of replying to operational and deadline notices from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_082": {
+    "message_id": "msg_082",
+    "action": "notify",
+    "message_type": "urgent",
+    "reason": "The message is from a work context and contains a direct deadline or meeting dependency.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0218;message_0380",
+    "key_signals": [
+      "The message is from a work context and contains a direct deadline or meeting dependency.",
+      "User historically engages with urgent incident alerts from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_066": {
+    "message_id": "msg_066",
+    "action": "mute",
+    "message_type": "promotion",
+    "reason": "The user has opted out of or repeatedly dismissed similar marketing messages.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0402;message_0188",
+    "key_signals": [
+      "User opted out of promotions from this business.",
+      "History of dismissing similar promotional messages."
+    ],
+    "source": "model"
+  },
+  "msg_049": {
+    "message_id": "msg_049",
+    "action": "notify",
+    "message_type": "business_update",
+    "reason": "A verified business is sending a reminder that matches the user's recent booking history.",
+    "confidence": 0.91,
+    "evidence_message_ids": "message_0291",
+    "key_signals": [
+      "A verified business is sending an update that matches the user's recent booking history.",
+      "User has a history of engaging with return pickup reminders from this established sender."
+    ],
+    "source": "model"
+  },
+  "msg_015": {
+    "message_id": "msg_015",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "The message asks for urgent OTP or account verification through a suspicious flow.",
+    "confidence": 0.91,
+    "evidence_message_ids": "message_0085",
+    "key_signals": [
+      "Safety layer verdict is binding for OTP or credential requests.",
+      "The message demands an OTP and threatens account locking."
+    ],
+    "source": "model"
+  },
+  "msg_051": {
+    "message_id": "msg_051",
+    "action": "mute",
+    "message_type": "promotion",
+    "reason": "The user has opted out of or repeatedly dismissed similar marketing messages.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0257;message_0103",
+    "key_signals": [
+      "The user opted out of promotions for this business.",
+      "Similar historical messages were dismissed or muted by this user."
+    ],
+    "source": "model"
+  },
+  "msg_097": {
+    "message_id": "msg_097",
+    "action": "digest",
+    "message_type": "personal",
+    "reason": "The sender is trusted, but the message has no urgent action or safety relevance.",
+    "confidence": 0.82,
+    "evidence_message_ids": "message_0054",
+    "key_signals": [
+      "The sender is trusted and has a history of engaged messages without urgency.",
+      "The message explicitly states there is nothing urgent and can wait until tomorrow."
+    ],
+    "source": "model"
+  },
+  "msg_089": {
+    "message_id": "msg_089",
+    "action": "notify",
+    "message_type": "event",
+    "reason": "A verified business is sending an update that matches the user's recent order history.",
+    "confidence": 0.8,
+    "evidence_message_ids": "none",
+    "key_signals": [
+      "A verified or local business context with a strict same-day retrieval window for a personal item.",
+      "The message directly addresses the user regarding their lost property without any payment or scam pressure."
+    ],
+    "source": "model"
+  },
+  "msg_053": {
+    "message_id": "msg_053",
+    "action": "digest",
+    "message_type": "business_update",
+    "reason": "The sender is trusted, but the message has no urgent action or safety relevance.",
+    "confidence": 0.85,
+    "evidence_message_ids": "message_0411;message_0253",
+    "key_signals": [
+      "The sender is a trusted group admin sharing non-urgent market research that matches the user's historical engagement.",
+      "The message explicitly states there is no intraday call and to read after the market."
+    ],
+    "source": "model"
+  },
+  "msg_059": {
+    "message_id": "msg_059",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "The message asks for urgent OTP or account verification through a suspicious flow.",
+    "confidence": 0.9,
+    "evidence_message_ids": "message_0213",
+    "key_signals": [
+      "The message asks for account numbers under time pressure, indicating a suspicious flow.",
+      "Safety check requires muting clear risks despite past engagement."
+    ],
+    "source": "model"
+  },
+  "msg_024": {
+    "message_id": "msg_024",
+    "action": "mute",
+    "message_type": "promotion",
+    "reason": "The user has opted out of or repeatedly dismissed similar marketing messages.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0257;message_0103",
+    "key_signals": [
+      "The user opted out of promotions from this business.",
+      "Similar historical promotional messages were dismissed or muted by this user."
+    ],
+    "source": "model"
   }
 }
