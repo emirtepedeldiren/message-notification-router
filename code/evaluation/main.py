@@ -72,11 +72,24 @@ def render_report(result: RunResult, verbose: bool = False) -> str:
     calibration = score_calibration(correct, [r.confidence for r in result.rows])
     safety = score_safety(result.gold_actions, result.gold_types, result.pred_actions)
 
+    # Quota can cut a run short, leaving some rows on the rule baseline. Mixing
+    # those into one number hides which component is actually being measured.
+    modelled = [i for i, r in enumerate(result.rows) if r.source == "model"]
+    fell_back = [i for i, r in enumerate(result.rows) if r.source != "model"]
+
     lines = [
         f"## {result.name}",
         "",
         f"- action accuracy: **{action_report.accuracy:.0%}** ({sum(correct)}/{len(correct)}), "
-        f"macro-F1 {action_report.macro_f1:.2f}",
+        f"macro-F1 {action_report.macro_f1:.2f}",]
+    if fell_back and modelled:
+        model_acc = sum(correct[i] for i in modelled) / len(modelled)
+        rule_acc = sum(correct[i] for i in fell_back) / len(fell_back)
+        lines.append(
+            f"- coverage: {len(modelled)}/{len(result.rows)} rows answered by the model "
+            f"({model_acc:.0%} accurate); {len(fell_back)} fell back to rules ({rule_acc:.0%} accurate)"
+        )
+    lines += [
         f"- message_type accuracy: **{type_report.accuracy:.0%}**, macro-F1 {type_report.macro_f1:.2f}",
         f"- safety: {safety.unsafe_muted}/{safety.unsafe_total} risky messages muted "
         f"(recall {safety.recall:.0%}), {safety.unsafe_notified} reached notify",

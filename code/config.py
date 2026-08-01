@@ -20,15 +20,27 @@ API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
 # the two workloads deliberately sit on different models: perception runs once
 # and is cached, routing is the accuracy-critical path.
 # (gemini-3.6-flash allows only 20 requests/day on the free tier — unusable here.)
-ROUTER_MODEL = os.environ.get("ROUTER_MODEL", "gemini-2.5-flash")
+ROUTER_MODEL = os.environ.get("ROUTER_MODEL", "gemini-3.5-flash")
 PERCEPTION_MODEL = os.environ.get("PERCEPTION_MODEL", "gemini-3.5-flash-lite")
+
+# Daily allowances are per model, and 110 messages can exhaust one mid-run.
+# When that happens the router moves to the next model here rather than
+# dropping every remaining message to the rule baseline.
+ROUTER_FALLBACK_MODELS = [
+    model.strip()
+    for model in os.environ.get(
+        "ROUTER_FALLBACK_MODELS",
+        "gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-3.5-flash-lite",
+    ).split(",")
+    if model.strip()
+]
 
 # Deterministic by default so reruns reproduce the submitted output.csv.
 TEMPERATURE = float(os.environ.get("ROUTER_TEMPERATURE", "0"))
 
 # Free-tier friendly: stay well under the requests-per-minute ceiling.
-MAX_CONCURRENCY = int(os.environ.get("MAX_CONCURRENCY", "4"))
-REQUESTS_PER_MINUTE = int(os.environ.get("REQUESTS_PER_MINUTE", "12"))
+MAX_CONCURRENCY = int(os.environ.get("MAX_CONCURRENCY", "3"))
+REQUESTS_PER_MINUTE = int(os.environ.get("REQUESTS_PER_MINUTE", "8"))
 MAX_RETRIES = int(os.environ.get("MAX_RETRIES", "4"))
 
 # Perception sends whole images and audio files, so it is limited by the

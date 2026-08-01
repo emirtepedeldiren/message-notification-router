@@ -15,7 +15,7 @@ from pathlib import Path
 import config
 from data_loader import ACTIONS, MESSAGE_TYPES, Dataset, Message
 from context import MessageContext
-from llm import GeminiClient
+from llm import GeminiClient, QuotaExhausted
 from retrieval import normalise
 from rapidfuzz import fuzz
 from risk import RiskVerdict
@@ -141,6 +141,9 @@ class Router:
         self.dataset = dataset
         self._client = client
         self.model = model or config.ROUTER_MODEL
+        # An explicitly requested model is honoured alone, so model comparison
+        # in the evaluation measures that model rather than a silent chain.
+        self._spare_models = [] if model else [m for m in config.ROUTER_FALLBACK_MODELS if m != self.model]
         self._catalogues: dict[str, str] = {}
 
     def catalogue_for(self, exclude_id: str = "") -> str:
@@ -178,13 +181,26 @@ class Router:
         return "\n\n".join(sections)
 
     def route(self, ctx: MessageContext, verdict: RiskVerdict, temperature: float | None = None) -> Decision | None:
-        """Ask the model to route one message. Returns None if the call failed."""
-        raw = self.client.generate_json(
-            model=self.model,
-            prompt=f"{SYSTEM_PROMPT}\n\n{self.build_prompt(ctx, verdict)}",
-            schema=RESPONSE_SCHEMA,
-            temperature=temperature,
-        )
+        """Ask the model to route one message. Returns None if the call failed.
+
+        Raises `QuotaExhausted` only once every configured model is spent; until
+        then it moves to the next one and keeps going.
+        """
+        prompt = f"{SYSTEM_PROMPT}\n\n{self.build_prompt(ctx, verdict)}"
+
+        raw = None
+        while raw is None:
+            try:
+                raw = self.client.generate_json(
+                    model=self.model, prompt=prompt, schema=RESPONSE_SCHEMA, temperature=temperature
+                )
+                break
+            except QuotaExhausted:
+                if not self._spare_models:
+                    raise
+                self.model = self._spare_models.pop(0)
+                print(f"  ! switching router model to {self.model}", flush=True)
+
         if raw is None:
             return None
 

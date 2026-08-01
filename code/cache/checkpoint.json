@@ -1,0 +1,72 @@
+{
+  "msg_091": {
+    "message_id": "msg_091",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "The message asks for urgent OTP or account verification through a suspicious flow.",
+    "confidence": 0.93,
+    "evidence_message_ids": "message_0238;message_0381",
+    "key_signals": [
+      "The message requests a sensitive 6-digit login code (OTP).",
+      "The safety layer issued a critical verdict to mute the message.",
+      "The user has previously dismissed and reported identical messages from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_023": {
+    "message_id": "msg_023",
+    "action": "notify",
+    "message_type": "payment",
+    "reason": "A verified business is sending an important account or payment update that matches the user's history.",
+    "confidence": 0.9,
+    "evidence_message_ids": "message_0243",
+    "key_signals": [
+      "The sender is a verified bank with whom the user has an active relationship.",
+      "The user has previously replied to this exact message type.",
+      "The message contains important account or payment updates."
+    ],
+    "source": "model"
+  },
+  "msg_090": {
+    "message_id": "msg_090",
+    "action": "digest",
+    "message_type": "unknown",
+    "reason": "The sender is unfamiliar, but the message does not show urgency, payment pressure, or safety risk.",
+    "confidence": 0.83,
+    "evidence_message_ids": "none",
+    "key_signals": [
+      "The sender is unfamiliar and contacting the user for the first time.",
+      "The message explicitly states there is no urgency regarding the package mix-up.",
+      "There are no indicators of spam, scam, or urgent payment pressure."
+    ],
+    "source": "model"
+  },
+  "msg_048": {
+    "message_id": "msg_048",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "The message uses fake support language and account-blocking pressure to push the user into action.",
+    "confidence": 0.93,
+    "evidence_message_ids": "message_0151",
+    "key_signals": [
+      "The message demands immediate payment under threat of blocking access card.",
+      "The sender is untrusted and has sent similar suspicious payment requests previously.",
+      "The safety layer flagged this message as a critical payment scam."
+    ],
+    "source": "model"
+  },
+  "msg_040": {
+    "message_id": "msg_040",
+    "action": "mute",
+    "message_type": "forward",
+    "reason": "The sender has a pattern of repeated forwards or greetings that the user usually ignores.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0136;message_0135",
+    "key_signals": [
+      "The message is a chain-forward that has been forwarded 7 times.",
+      "The user has previously dismissed similar forward messages from this sender.",
+      "The sender is untrusted and the group is muted by the user."
+    ],
+    "source": "model"
+  }
+}
