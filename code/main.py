@@ -28,6 +28,13 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--no-quiet-hours", action="store_true", help="disable the do-not-disturb guardrail")
     parser.add_argument("--model", help=f"router model (default {config.ROUTER_MODEL})")
     parser.add_argument("--workers", type=int, default=config.MAX_CONCURRENCY)
+    parser.add_argument(
+        "--checkpoint",
+        type=Path,
+        nargs="?",
+        const=config.CACHE_DIR / "checkpoint.json",
+        help="resume from (and write to) a checkpoint file so quota is not spent twice",
+    )
     parser.add_argument("--verbose", action="store_true", help="print the guardrails that fired")
     return parser.parse_args(argv)
 
@@ -61,6 +68,7 @@ def main(argv: list[str] | None = None) -> int:
         apply_quiet_hours=not args.no_quiet_hours,
         model=args.model,
         workers=args.workers,
+        checkpoint=args.checkpoint,
     )
     rows = Pipeline(dataset, options).run(messages)
     write_output(rows, args.output)

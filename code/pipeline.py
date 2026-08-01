@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import csv
+import json
+import threading
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
@@ -11,6 +13,7 @@ import config
 import risk
 from context import MessageContext, build_context
 from data_loader import Dataset, Message
+from llm import QuotaExhausted
 from perception import MediaFacts, MediaPerceiver
 from postprocess import Routed, finalise
 from router import Router
@@ -25,6 +28,45 @@ class RunOptions:
     model: str | None = None
     workers: int = config.MAX_CONCURRENCY
     quiet: bool = False
+    checkpoint: Path | None = None
+
+
+class Checkpoint:
+    """Persists finished rows so an interrupted run can resume.
+
+    Free-tier quota can run out mid-run, and re-routing messages that already
+    have answers would spend the remaining allowance on work already done.
+    """
+
+    def __init__(self, path: Path | None):
+        self.path = path
+        self._lock = threading.Lock()
+        self._rows: dict[str, dict] = {}
+        if path and path.exists():
+            self._rows = json.loads(path.read_text(encoding="utf-8"))
+
+    def get(self, message_id: str) -> Routed | None:
+        stored = self._rows.get(message_id)
+        if stored is None:
+            return None
+        return Routed(**{**stored, "adjustments": []})
+
+    def put(self, row: Routed) -> None:
+        if self.path is None:
+            return
+        with self._lock:
+            self._rows[row.message_id] = {
+                "message_id": row.message_id,
+                "action": row.action,
+                "message_type": row.message_type,
+                "reason": row.reason,
+                "confidence": row.confidence,
+                "evidence_message_ids": row.evidence_message_ids,
+                "key_signals": row.key_signals,
+                "source": row.source,
+            }
+            self.path.parent.mkdir(parents=True, exist_ok=True)
+            self.path.write_text(json.dumps(self._rows, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
 class Pipeline:
@@ -32,7 +74,9 @@ class Pipeline:
         self.dataset = dataset
         self.options = options or RunOptions()
         self.perceiver = MediaPerceiver()
+        self.checkpoint = Checkpoint(self.options.checkpoint)
         self._router: Router | None = None
+        self._quota_gone = False
 
     @property
     def router(self) -> Router:
@@ -81,9 +125,24 @@ class Pipeline:
         ]
 
     def route_one(self, ctx: MessageContext) -> Routed:
+        cached = self.checkpoint.get(ctx.message.message_id)
+        if cached is not None:
+            return cached
+
         verdict = risk.assess(ctx)
-        decision = self.router.route(ctx, verdict) if self.options.use_model else None
-        return finalise(ctx, verdict, decision, apply_quiet_hours=self.options.apply_quiet_hours)
+        decision = None
+        if self.options.use_model and not self._quota_gone:
+            try:
+                decision = self.router.route(ctx, verdict)
+            except QuotaExhausted as exc:
+                # Keep going on rules alone rather than abandoning the run: a
+                # complete output with a degraded tail beats a partial file.
+                self._quota_gone = True
+                print(f"  ! {exc}; routing the remainder on rules alone", flush=True)
+
+        row = finalise(ctx, verdict, decision, apply_quiet_hours=self.options.apply_quiet_hours)
+        self.checkpoint.put(row)
+        return row
 
     def run(self, messages: list[Message]) -> list[Routed]:
         contexts = self.prepare(messages)
