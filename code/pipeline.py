@@ -45,9 +45,17 @@ class Checkpoint:
         if path and path.exists():
             self._rows = json.loads(path.read_text(encoding="utf-8"))
 
-    def get(self, message_id: str) -> Routed | None:
+    def get(self, message_id: str, accept_rules: bool = True) -> Routed | None:
+        """Return a stored row, if one can be reused.
+
+        A row produced by the rule fallback is a placeholder left behind when
+        quota ran out, not a finished answer. With a working model available,
+        resuming should redo those rather than keep the degraded verdict.
+        """
         stored = self._rows.get(message_id)
         if stored is None:
+            return None
+        if not accept_rules and stored.get("source") != "model":
             return None
         return Routed(**{**stored, "adjustments": []})
 
@@ -133,7 +141,10 @@ class Pipeline:
         ]
 
     def route_one(self, ctx: MessageContext) -> Routed:
-        cached = self.checkpoint.get(ctx.message.message_id)
+        cached = self.checkpoint.get(
+            ctx.message.message_id,
+            accept_rules=not self.options.use_model or self._quota_gone,
+        )
         if cached is not None:
             return cached
 

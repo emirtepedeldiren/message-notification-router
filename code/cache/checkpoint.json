@@ -312,5 +312,174 @@
       "The message uses fake support language and account-blocking pressure to push the user into action."
     ],
     "source": "model"
+  },
+  "msg_065": {
+    "message_id": "msg_065",
+    "action": "notify",
+    "message_type": "promotion",
+    "reason": "A verified business is sending an update that matches the user's recent order history.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0261;message_0185",
+    "key_signals": [
+      "A verified business is sending an update that matches the user's recent order history.",
+      "The user has a demonstrated history of opening similar promotional messages from this business."
+    ],
+    "source": "model"
+  },
+  "msg_038": {
+    "message_id": "msg_038",
+    "action": "mute",
+    "message_type": "spam",
+    "reason": "Similar historical messages were ignored, dismissed, or muted by this user.",
+    "confidence": 0.9,
+    "evidence_message_ids": "message_0131;message_0132",
+    "key_signals": [
+      "Similar historical messages were dismissed or muted by this user.",
+      "The sender has a pattern of repeated forwards or greetings that the user usually ignores."
+    ],
+    "source": "model"
+  },
+  "msg_086": {
+    "message_id": "msg_086",
+    "action": "notify",
+    "message_type": "business_update",
+    "reason": "A verified business is sending an update that matches the user's recent booking history.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0222",
+    "key_signals": [
+      "A verified business is sending an update that matches the user's recent booking history.",
+      "Similar historical messages were engaged with by this user."
+    ],
+    "source": "model"
+  },
+  "msg_014": {
+    "message_id": "msg_014",
+    "action": "mute",
+    "message_type": "promotion",
+    "reason": "The user has opted out of or repeatedly dismissed similar marketing messages.",
+    "confidence": 0.9,
+    "evidence_message_ids": "message_0017;message_0018",
+    "key_signals": [
+      "User has explicitly opted out of promotions from this business.",
+      "Similar historical promotional messages were consistently dismissed or muted by this user."
+    ],
+    "source": "model"
+  },
+  "msg_094": {
+    "message_id": "msg_094",
+    "action": "mute",
+    "message_type": "promotion",
+    "reason": "The user has opted out of or repeatedly dismissed similar marketing messages.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0356",
+    "key_signals": [
+      "The user has repeatedly dismissed similar marketing messages.",
+      "The user has no recorded relationship with this business."
+    ],
+    "source": "model"
+  },
+  "msg_029": {
+    "message_id": "msg_029",
+    "action": "digest",
+    "message_type": "promotion",
+    "reason": "The message is promotional but matches a topic or business the user has opted into.",
+    "confidence": 0.86,
+    "evidence_message_ids": "message_0113",
+    "key_signals": [
+      "The message is promotional but matches a topic or business the user has opted into.",
+      "User historically engaged with multiple similar messages from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_105": {
+    "message_id": "msg_105",
+    "action": "mute",
+    "message_type": "forward",
+    "reason": "Similar historical messages were ignored, dismissed, or muted by this user.",
+    "confidence": 0.88,
+    "evidence_message_ids": "message_0233;message_0373",
+    "key_signals": [
+      "The sender has a history of sending forwarded messages that the user dismisses.",
+      "The user previously dismissed and muted identical health tip forwards from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_002": {
+    "message_id": "msg_002",
+    "action": "notify",
+    "message_type": "urgent",
+    "reason": "The message is from a work context and contains a direct deadline or meeting dependency.",
+    "confidence": 0.89,
+    "evidence_message_ids": "message_0169;message_0003",
+    "key_signals": [
+      "The sender directly @-mentions the user with a time-sensitive work request.",
+      "The user has an established history of engaging with work-related requests from this sender."
+    ],
+    "source": "model"
+  },
+  "msg_010": {
+    "message_id": "msg_010",
+    "action": "digest",
+    "message_type": "business_update",
+    "reason": "A verified business is sending a legitimate but non-urgent update.",
+    "confidence": 0.85,
+    "evidence_message_ids": "message_0011;message_0076",
+    "key_signals": [
+      "Established relationship with verified business PVRINOX Cinemas matching recent movie feedback",
+      "User has a 100% engagement history on similar feedback messages without any dismissals"
+    ],
+    "source": "model"
+  },
+  "msg_078": {
+    "message_id": "msg_078",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "Similar historical messages were ignored, dismissed, or muted by this user.",
+    "confidence": 0.9,
+    "evidence_message_ids": "message_0211;message_0212",
+    "key_signals": [
+      "The message asks for urgent banking details through a suspicious flow.",
+      "The sender has a history of similar dismissed and reported messages."
+    ],
+    "source": "model"
+  },
+  "msg_013": {
+    "message_id": "msg_013",
+    "action": "mute",
+    "message_type": "promotion",
+    "reason": "Similar historical messages were ignored, dismissed, or muted by this user.",
+    "confidence": 0.85,
+    "evidence_message_ids": "message_0081;message_0082",
+    "key_signals": [
+      "The message contains promotional wording with urgency.",
+      "Similar historical messages from this sender were dismissed by the user."
+    ],
+    "source": "model"
+  },
+  "msg_018": {
+    "message_id": "msg_018",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "Similar historical messages were ignored, dismissed, or muted by this user.",
+    "confidence": 0.91,
+    "evidence_message_ids": "message_0026",
+    "key_signals": [
+      "Clear scam pattern with reward claims and expiration pressure.",
+      "Similar historical messages were dismissed or reported by this user."
+    ],
+    "source": "model"
+  },
+  "msg_044": {
+    "message_id": "msg_044",
+    "action": "mute",
+    "message_type": "scam",
+    "reason": "The message asks for urgent OTP or account verification through a suspicious flow.",
+    "confidence": 0.9,
+    "evidence_message_ids": "message_0143",
+    "key_signals": [
+      "Safety layer verdict mandates mute due to OTP request",
+      "Message uses account-blocking pressure and asks for verification"
+    ],
+    "source": "model"
   }
 }
