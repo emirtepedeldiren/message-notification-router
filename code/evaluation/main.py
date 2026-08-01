@@ -174,17 +174,15 @@ def main(argv: list[str] | None = None) -> int:
                 run_configuration(dataset, samples, f"hybrid: {model}", RunOptions(model=model, quiet=True))
             )
         if args.ablations:
-            results.append(
-                run_configuration(dataset, samples, "rules only (no model)", RunOptions(use_model=False, quiet=True))
-            )
-            results.append(
-                run_configuration(
-                    dataset,
-                    samples,
-                    "hybrid without the quiet-hours guardrail",
-                    RunOptions(apply_quiet_hours=False, quiet=True),
-                )
-            )
+            # Each row removes exactly one component, so the drop against the
+            # full system is what that component is worth.
+            for name, options in [
+                ("rules only, no model", RunOptions(use_model=False, quiet=True)),
+                ("no media understanding", RunOptions(use_media=False, quiet=True)),
+                ("no history retrieval", RunOptions(use_retrieval=False, quiet=True)),
+                ("no quiet-hours guardrail", RunOptions(apply_quiet_hours=False, quiet=True)),
+            ]:
+                results.append(run_configuration(dataset, samples, name, options))
 
     sections = [render_report(result, verbose=args.verbose) for result in results]
 

@@ -29,6 +29,10 @@ class RunOptions:
     workers: int = config.MAX_CONCURRENCY
     quiet: bool = False
     checkpoint: Path | None = None
+    # Ablation switches. Turning one off removes that evidence from the
+    # context card so the evaluation can price what it contributes.
+    use_media: bool = True
+    use_retrieval: bool = True
 
 
 class Checkpoint:
@@ -126,11 +130,12 @@ class Pipeline:
         return facts
 
     def prepare(self, messages: list[Message]) -> list[MessageContext]:
-        media = self.perceive_all(messages)
+        media = self.perceive_all(messages) if self.options.use_media else {}
         # Everything described so far, including media attached to historical
         # messages, so retrieval can match those on content too.
-        history_media = self.perceiver.cached_text()
-        return [
+        history_media = self.perceiver.cached_text() if self.options.use_media else {}
+
+        contexts = [
             build_context(
                 self.dataset,
                 message,
@@ -139,6 +144,10 @@ class Pipeline:
             )
             for message in messages
         ]
+        if not self.options.use_retrieval:
+            for ctx in contexts:
+                ctx.evidence = []
+        return contexts
 
     def route_one(self, ctx: MessageContext) -> Routed:
         cached = self.checkpoint.get(

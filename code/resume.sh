@@ -105,3 +105,13 @@ PY
 echo
 echo "== validating and packaging =="
 ./code/package_submission.sh
+
+echo
+echo "== ablations =="
+echo "  Prices each component against the full system on the 30 labelled rows."
+echo "  The submission is already complete and packaged; this only adds to the report."
+echo "  Ctrl-C now to skip."
+sleep 5
+$PYTHON -u code/evaluation/main.py --ablations --verbose --report code/evaluation/report.md || {
+  echo "  ablations did not finish — output.csv and code.zip are unaffected"
+}
