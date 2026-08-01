@@ -16,3 +16,7 @@ code/cache/llm/
 
 # os
 .DS_Store
+
+# candidate run artefacts
+output_candidate.csv
+code/cache/checkpoint_candidate.json
