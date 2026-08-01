@@ -119,8 +119,16 @@ class Pipeline:
 
     def prepare(self, messages: list[Message]) -> list[MessageContext]:
         media = self.perceive_all(messages)
+        # Everything described so far, including media attached to historical
+        # messages, so retrieval can match those on content too.
+        history_media = self.perceiver.cached_text()
         return [
-            build_context(self.dataset, message, media.get(message.media_id) if message.is_media else None)
+            build_context(
+                self.dataset,
+                message,
+                media.get(message.media_id) if message.is_media else None,
+                media_text=history_media,
+            )
             for message in messages
         ]
 

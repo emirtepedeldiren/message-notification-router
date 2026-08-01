@@ -241,6 +241,18 @@ class MediaPerceiver:
     def _cache_key(self, media_id: str, path: Path) -> str:
         return f"{PROMPT_VERSION}:{media_id}:{_digest(path)}"
 
+    def cached_text(self) -> dict[str, str]:
+        """Media id -> searchable text, for everything already described.
+
+        Lets retrieval match historical media messages on their contents
+        without any further API calls.
+        """
+        return {
+            entry["media_id"]: MediaFacts(**entry).query_text
+            for entry in self._cache.values()
+            if entry.get("available")
+        }
+
     def save(self) -> None:
         with self._lock:
             self._cache_path.parent.mkdir(parents=True, exist_ok=True)

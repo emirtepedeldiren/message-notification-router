@@ -235,6 +235,7 @@ def build_context(
     dataset: Dataset,
     message: Message,
     media: MediaFacts | None = None,
+    media_text: dict[str, str] | None = None,
 ) -> MessageContext:
     """Gather every signal for one message into a `MessageContext`."""
     user = dataset.users.get(message.user_id)
@@ -247,7 +248,7 @@ def build_context(
 
     media_query = media.query_text if media and media.available else None
     query = " ".join(p for p in (message.message_text, media_query) if p).strip() or None
-    evidence = retrieve(dataset, message, query_text=query, limit=4)
+    evidence = retrieve(dataset, message, query_text=query, limit=4, media_text=media_text)
 
     text = message.message_text
     if media and media.available:

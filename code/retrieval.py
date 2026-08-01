@@ -91,12 +91,15 @@ def retrieve(
     message: Message,
     query_text: str | None = None,
     limit: int = 4,
+    media_text: dict[str, str] | None = None,
 ) -> list[Evidence]:
     """Rank the user's history against this message, best evidence first.
 
     `query_text` lets callers substitute a richer query — a voice-note
     transcript or an image's extracted text — for media messages whose own
-    `message_text` is empty.
+    `message_text` is empty. `media_text` does the same for the candidates:
+    four historical voice notes carry no caption at all, so without their
+    transcripts they could never be matched on content.
     """
     history = dataset.history_by_user.get(message.user_id, [])
     if not history:
@@ -112,7 +115,10 @@ def retrieve(
         channel, label = _channel_score(message, candidate)
         text_score = 0.0
         if query:
-            candidate_text = normalise(candidate.message_text)
+            raw_candidate = candidate.message_text
+            if candidate.media_id and media_text:
+                raw_candidate = f"{raw_candidate} {media_text.get(candidate.media_id, '')}"
+            candidate_text = normalise(raw_candidate)
             if candidate_text:
                 text_score = W_TEXT * (fuzz.token_set_ratio(query, candidate_text) / 100.0) ** 2
 
