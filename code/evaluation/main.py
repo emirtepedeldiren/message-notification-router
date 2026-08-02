@@ -168,10 +168,19 @@ def main(argv: list[str] | None = None) -> int:
             run_configuration(dataset, samples, "rules only (no model)", RunOptions(use_model=False, quiet=True))
         )
     else:
-        models = args.compare if args.compare else [config.ROUTER_MODEL]
-        for model in models:
+        if args.compare:
+            # Comparing models means pinning each one, which also disables
+            # failover — otherwise the run would silently measure a chain.
+            for model in args.compare:
+                results.append(
+                    run_configuration(dataset, samples, f"hybrid: {model}", RunOptions(model=model, quiet=True))
+                )
+        else:
+            # The baseline for the ablations must get the same failover the
+            # ablated configurations get, or a drained allowance handicaps the
+            # one row everything else is measured against.
             results.append(
-                run_configuration(dataset, samples, f"hybrid: {model}", RunOptions(model=model, quiet=True))
+                run_configuration(dataset, samples, "full system", RunOptions(quiet=True))
             )
         if args.ablations:
             # Each row removes exactly one component, so the drop against the
@@ -187,14 +196,41 @@ def main(argv: list[str] | None = None) -> int:
     sections = [render_report(result, verbose=args.verbose) for result in results]
 
     if len(results) > 1:
+        # A configuration whose model calls failed is measuring quota, not the
+        # component under test. Comparing it against one that succeeded would
+        # invert the conclusion, so those rows are quarantined rather than
+        # quietly averaged in.
+        def coverage(result: RunResult) -> float:
+            answered = sum(1 for row in result.rows if row.source == "model")
+            return answered / len(result.rows) if result.rows else 0.0
+
+        comparable, degraded = [], []
+        for result in results:
+            expects_model = "rules only" not in result.name
+            (degraded if expects_model and coverage(result) < 1.0 else comparable).append(result)
+
         table = [
             "## Comparison",
             "",
             "| configuration | action acc | type acc | safety recall | evidence overlap |",
             "|---|---|---|---|---|",
         ]
-        for name, action, types, safety, evidence in (summary_row(r) for r in results):
+        for name, action, types, safety, evidence in (summary_row(r) for r in comparable):
             table.append(f"| {name} | {action:.0%} | {types:.0%} | {safety:.0%} | {evidence:.0%} |")
+
+        if degraded:
+            table += [
+                "",
+                "**Excluded — incomplete model coverage, so these measure quota rather than "
+                "the component under test:**",
+                "",
+            ]
+            for result in degraded:
+                table.append(f"- {result.name} ({coverage(result):.0%} of rows answered by the model)")
+            table.append(
+                "\nThe ablation is only meaningful when every configuration ran to completion. "
+                "Re-run when allowances allow."
+            )
         sections.insert(0, "\n".join(table))
 
     report = "# Evaluation report\n\n" + "\n\n".join(sections) + "\n"
