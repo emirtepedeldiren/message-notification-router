@@ -90,23 +90,31 @@ echo "== building $ZIP =="
 rm -f "$ZIP"
 # Ship the runnable solution and its cache; leave out the corpus, the venv,
 # build artefacts, and anything holding a secret.
+# Checkpoints hold finished answers for every message. They exist so an
+# interrupted run can resume, but shipping one would put the predictions
+# inside the solution package, which is indistinguishable from hard-coded
+# labels no matter how it got there.
 zip -q -r "$ZIP" code \
   -x 'code/**/__pycache__/*' \
      'code/**/*.pyc' \
      'code/.pytest_cache/*' \
      'code/cache/llm/*' \
-     'code/cache/checkpoint.json'
+     'code/cache/checkpoint*.json'
 zip -q "$ZIP" .env.example
 echo "  $(du -h "$ZIP" | cut -f1)  $ZIP"
 unzip -l "$ZIP" | tail -1
 
 echo
 echo "== secret scan =="
-if unzip -p "$ZIP" | grep -qE 'AQ\.[A-Za-z0-9]{10}|AIza[A-Za-z0-9_-]{30}'; then
+if unzip -p "$ZIP" | grep -qE 'AQ\.[A-Za-z0-9_-]{10}|AIza[A-Za-z0-9_-]{30}|sk-[A-Za-z0-9]{20}|gh[pous]_[A-Za-z0-9]{20}'; then
   echo "  REFUSING: the archive contains something shaped like an API key"
   exit 1
 fi
-echo "  no API keys found in the archive"
+if unzip -l "$ZIP" | grep -qE 'checkpoint.*\.json|(^|/)\.env$'; then
+  echo "  REFUSING: the archive contains stored answers or a real .env"
+  exit 1
+fi
+echo "  no API keys, stored answers, or .env in the archive"
 
 echo
 echo "== upload these =="
